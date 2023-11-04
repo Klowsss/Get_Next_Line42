@@ -32,7 +32,7 @@ char	*line_extract(int fd, static int stach)
 
 	if (buffer == '\n')
 	{
-		ft_strdup(fd, buffer);	
+		ft_strdup(fd, buffer, 5);	
 }
 
 char	*read_content(int files, void *buff, size_t nbyte)
