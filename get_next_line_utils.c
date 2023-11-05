@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -50,51 +50,47 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (total_len);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	int		size;
-	char	*dest;
+	int	i;
 
 	i = 0;
-	size = ft_strlen(s);
-	dest = malloc((size + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
 	while (s[i] != '\0')
 	{
-		dest[i] = s[i];
+		if (s[i] == (char)c)
+		{
+			return ((char *)&s[i]);
+		}
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	if ((char)c == '\0')
+	{
+		return ((char *)&s[i]);
+	}
+	return (0);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_bzero(void *p, size_t n)
 {
-	char	*total_len;
 	size_t	i;
-	size_t	j;
-	size_t	s_len;
 
-	if (!s)
-		return (NULL);
-	if ((size_t)start > ft_strlen(s))
-		return (ft_strdup(""));
-	s_len = ft_strlen(s);
-	if (len > s_len - start)
-		len = s_len - start;
-	total_len = malloc(sizeof(char) * (len + 1));
-	if (!total_len)
-		return (0);
-	i = start;
-	j = 0;
-	while (i < ft_strlen(s) && j < len)
+	i = 0;
+	while (i < n)
 	{
-		total_len[j] = s[i];
-		j++;
+		*(char *)(p + i) = 0;
 		i++;
 	}
-	total_len[j] = '\0';
-	return (total_len);
-}	
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*total_size;
+
+	total_size = malloc(size * nmemb);
+	if (!total_size)
+		return (NULL);
+	ft_bzero(total_size, size * nmemb);
+	return (total_size);
+}
+
+	
